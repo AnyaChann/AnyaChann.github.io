@@ -1,3 +1,16 @@
+$(document).ready(() => {
+  if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+    // Load YouTube IFrame API if not already loaded
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  } else {
+    // If API is already loaded, set up event listeners
+    setupEventListeners();
+  }
+});
+
 let player;
 const songTitles = {
   '4adZ7AguVcw': 'blue - yung kai',
@@ -39,8 +52,11 @@ function setupEventListeners() {
         .addClass("openHer");
       $(".container").stop().animate({ backgroundColor: "#f48fb1" }, 2000);
       console.log("Abrindo");
-      player.playVideo(); // Play the video
+      if (player && typeof player.playVideo === 'function') {
+        player.playVideo(); // Play the video
+      }
       $("#music-widget").fadeIn(); // Show the music widget
+      $("#player").show(); // Ensure the player is visible
     } else {
       $(".message").removeClass("no-anim").addClass("closeNor");
       $(".heart")
@@ -49,8 +65,11 @@ function setupEventListeners() {
         .addClass("closeHer");
       $(".container").stop().animate({ backgroundColor: "#fce4ec" }, 2000);
       console.log("fechando");
-      player.pauseVideo(); // Pause the video
+      if (player && typeof player.pauseVideo === 'function') {
+        player.pauseVideo(); // Pause the video
+      }
       $("#music-widget").fadeOut(); // Hide the music widget
+      $("#player").hide(); // Hide the player
     }
   });
 
@@ -78,23 +97,31 @@ function setupEventListeners() {
   );
 
   document.getElementById('play-button').addEventListener('click', () => {
-    player.playVideo();
+    if (player && typeof player.playVideo === 'function') {
+      player.playVideo();
+    }
     document.getElementById('play-button').style.display = 'none';
     document.getElementById('pause-button').style.display = 'inline-flex';
   });
 
   document.getElementById('pause-button').addEventListener('click', () => {
-    player.pauseVideo();
+    if (player && typeof player.pauseVideo === 'function') {
+      player.pauseVideo();
+    }
     document.getElementById('pause-button').style.display = 'none';
     document.getElementById('play-button').style.display = 'inline-flex';
   });
 
   document.getElementById('next-button').addEventListener('click', () => {
-    player.nextVideo();
+    if (player && typeof player.nextVideo === 'function') {
+      player.nextVideo();
+    }
   });
 
   document.getElementById('prev-button').addEventListener('click', () => {
-    player.previousVideo();
+    if (player && typeof player.previousVideo === 'function') {
+      player.previousVideo();
+    }
   });
 
   // Make the music widget draggable within the browser window
@@ -137,17 +164,3 @@ function dragMoveListener(event) {
   target.setAttribute('data-x', x);
   target.setAttribute('data-y', y);
 }
-
-// Ensure the event listeners are set up when the document is ready
-$(document).ready(() => {
-  if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
-    // Load YouTube IFrame API if not already loaded
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  } else {
-    // If API is already loaded, set up event listeners
-    setupEventListeners();
-  }
-});
