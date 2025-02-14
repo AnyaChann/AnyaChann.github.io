@@ -205,7 +205,7 @@ body {
     gap: 10px;
     cursor: move;
     width: 15rem; /* Fixed width */
-    height: 8rem; /* Fixed height */
+    height: 6rem; /* Fixed height */
     display: none; /* Initially hidden */
 }
 
