@@ -205,14 +205,14 @@ body {
     gap: 10px;
     cursor: move;
     width: 15rem; /* Fixed width */
-    height: 6rem; /* Fixed height */
+    /* height: 7rem; */
     display: none; /* Initially hidden */
 }
 
 .status-bar {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 10px 20px;
+    padding: 10px 1px;
     border-radius: 5px;
     font-family: "Quicksand", serif;
     font-size: 1rem;
@@ -251,8 +251,8 @@ body {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .message {
-        width: 90%;
-        height: 70%;
+        /* width: 90%;
+        height: 70%; */
         font-size: clamp(14px, 8vw, 16px);
     }
 
@@ -261,8 +261,8 @@ body {
     }
 
     .music-widget {
-        width: 12rem; /* Adjusted width for smaller screens */
-        height: 7rem; /* Adjusted height for smaller screens */
+        width: 12rem; 
+        /* height: 7rem;  */
     }
 
     .status-bar {
@@ -277,8 +277,8 @@ body {
 
 @media (max-width: 480px) {
     .message {
-        width: 95%;
-        height: 65%;
+        /* width: 95%;
+        height: 65%; */
         font-size: clamp(12px, 6vw, 14px);
     }
 
@@ -287,8 +287,8 @@ body {
     }
 
     .music-widget {
-        width: 10rem; /* Adjusted width for smaller screens */
-        height: 6rem; /* Adjusted height for smaller screens */
+        width: 10rem; 
+        /* height: 6rem;  */
     }
 
     .status-bar {
