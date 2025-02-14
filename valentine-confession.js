@@ -22,6 +22,10 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
   console.log("Player Ready");
+  setupEventListeners();
+}
+
+function setupEventListeners() {
   $("#messageState").on("change", (x) => {
     $(".message").removeClass("openNor").removeClass("closeNor");
     if ($("#messageState").is(":checked")) {
@@ -133,3 +137,17 @@ function dragMoveListener(event) {
   target.setAttribute('data-x', x);
   target.setAttribute('data-y', y);
 }
+
+// Ensure the event listeners are set up when the document is ready
+$(document).ready(() => {
+  if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+    // Load YouTube IFrame API if not already loaded
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  } else {
+    // If API is already loaded, set up event listeners
+    setupEventListeners();
+  }
+});
